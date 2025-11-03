@@ -1,0 +1,75 @@
+Got you. I’ll convert everything into **clean, copy-pasteable plain text**.
+No formatting fluff, no images — just structured content you can drop into a file for Codex.
+
+---
+
+### **Material 1 – Gerätreservierungen (Tabellenausschnitt)**
+
+```
+GeräteNr | TypNr | Bezeichnung            | Schüler (Name) | AusweisNr | von        | bis
+--------------------------------------------------------------------------------------------
+12301    | 123   | Epson EB-1920W         | Kai Muster     | 45577     | 07.06.2021 | 09.06.2021
+         |       |                         | Laura Mai      | 23225     | 15.06.2021 | 16.06.2021
+
+12302    | 123   | Epson EB-1920W         | Kai Muster     | 45577     | 15.06.2021 | 17.06.2021
+
+23301    | 233   | Dell Latitude E5500    | Kai Muster     | 45577     | 26.05.2021 | 28.05.2021
+         |       |                         | Laura May      | 23225     | 15.06.2021 | 16.06.2021
+         |       |                         | Lia Meier      | 89761     | 21.06.2021 | 23.06.2021
+
+23302    | 223   | Dell Latitude E5500    | Paul Schnell   | 87756     | 09.06.2021 | 10.06.2021
+         |       |                         | Max Opel       | 23348     | 15.06.2021 | 17.06.2021
+         |       |                         | Luna Kurz      | 33611     | 21.06.2021 | 22.06.2021
+
+23303    | 223   | Dell Latitude E5500 (in Reparatur)
+
+55301    | 553   | Canon XF 100           | Kai Muster     | 45577     | 19.05.2021 | 21.05.2021
+         |       |                         | Leon Müller    | 47111     | 09.06.2021 | 16.06.2021
+         |       |                         | Tom Lux        | 73382     | 07.06.2021 | 08.06.2021
+```
+
+*Hinweis:* Reservierungen in der Vergangenheit oder stornierte werden durchgestrichen angezeigt (nicht hier übernommen).
+
+---
+
+### **Material 2 – Entity-Relationship-Modell (textual description)**
+
+```
+Entities:
+1) Gerätetyp
+   - typNr (Primary Key)
+   - bezeichnung
+   Relationship: Ein Gerätetyp gehört zu vielen Geräten (1:n)
+
+2) Gerät
+   - geraeteNr (Primary Key)
+   - einsatzBereit (Boolean or similar)
+   Relationship: Ein Gerät kann von mehreren Schülern reserviert werden (0:n)
+
+3) Schüler
+   - ausweisNr (Primary Key)
+   - name
+   Relationship: Ein Schüler kann mehrere Reservierungen haben (0:m)
+
+4) Reserviert (Relationship)
+   - von (DATE)
+   - bis (DATE)
+   Connects: Gerät (0:n) <--> (0:m) Schüler
+```
+
+---
+
+### **Material 3 – SQL-Datentypen (Auszug)**
+
+```
+BOOLEAN   - True/False
+INTEGER   - 4 bytes, Ganzzahl
+DOUBLE    - 8 bytes, Fließkommazahl
+VARCHAR(n) - Zeichenkette variabler Länge (0–255)
+TEXT      - Langer Text
+DATE      - 'YYYY-MM-DD'
+TIME      - Zeitangabe hh:mm:ss (Bereich sehr groß)
+DATETIME  - 'YYYY-MM-DD hh:mm:ss'
+```
+
+---

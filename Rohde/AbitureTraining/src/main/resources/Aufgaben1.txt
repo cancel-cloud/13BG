@@ -1,0 +1,68 @@
+Aufgaben
+Im Selbstlernzentrum (SLZ) einer gewerblich-technischen Berufsschule haben Schülerinnen und
+Schüler (im Folgenden Schüler genannt) die Möglichkeit, sich außerhalb der Unterrichtszeit oder in
+Freistunden aufzuhalten. Es stehen Arbeitsplätze mit PCs zur Verfügung, die für Recherchen, die
+Erstellung von Hausarbeiten oder zum Üben anhand von Lernsoftware genutzt werden können.
+Schüler können mit ihren Schülerausweisen Bücher und Multimedia-Geräte (Laptops, Tablets,
+Digitalkameras, Beamer usw.) ausleihen. Von jedem Gerätetyp gibt es in der Regel mehrere Geräte.
+Schüler können Geräte für eine Ausleihe reservieren. Die Aufsicht des SLZ kann ein Gerät auch ohne
+Reservierung ausleihen, wenn es zu dem gewünschten Zeitraum frei ist.
+1 Datenbank für das Selbstlernzentrum
+Ein Schüler muss sich mit seinem Schülerausweis bei der Aufsicht authentisieren, um ein Gerät
+zu reservieren. Die Reservierungen werden in eine Tabelle (Material 1) eingetragen.
+1.1 Stellen Sie die Tabelle in Material 1 dem in Material 2 dargestellten Entity-Relationship-Model
+(ERM) gegenüber.
+(4 BE)
+1.2 Überführen Sie das ERM in das relationale Modell unter Einhaltung der 3. Normalform und
+begründen Sie Ihre Entscheidungen.
+Hinweis: Alle Relationen sind in der Schreibweise Relation(PK, attribut1,...,FK#)
+anzugeben.
+(6 BE)
+1.3 Eine Datenbank SLZ mit den Tabellen Geraetetyp und Geraet existiert bereits. Sie soll um
+weitere Tabellen ergänzt werden, Daten sollen eingefügt, gelöscht bzw. ausgewertet werden.
+1.3.1 Formulieren Sie die SQL-Anweisungen, die die Datenbank um die erforderlichen Tabellen Ihres
+relationalen Modells inklusive der Primär- und Fremdschlüssel erweitern und jeweils einen
+Datensatz auf Grundlage der Tabelle in Material 1 in die neuen Tabellen einfügen.
+Hinweise: Eine Übersicht typischer Felddatentypen in SQL ist in Material 3 zu finden. Das
+Setzen von null-Werten ist auszuschließen.
+(8 BE)
+1.3.2 Ein Schüler möchte einen Laptop mit der Typenbezeichnung 'Dell Latitude E5500' vom
+16.06.2021 bis zum 18.06.2021 reservieren. Implementieren Sie eine SQL-Anweisung, die die
+Gerätenummern aller einsatzbereiten, nicht innerhalb dieses Zeitraums reservierten Geräte
+dieses Typs ausgibt.
+(5 BE)
+Seite 2 von 13
+Hessisches Kultusministerium Landesabitur 2021 (Nachtermin)
+Praktische Informatik Thema und Aufgabenstellung
+Leistungskurs Vorschlag C
+1.3.3 Das SLZ möchte eine Übersicht über alle Gerätetypen mit der Anzahl der jeweiligen Geräte
+sowie dem Mittelwert der Reservierungen in Tagen je Gerätetyp. Die Liste soll absteigend nach
+der mittleren Reservierungsdauer sortiert sein.
+Entwickeln Sie eine entsprechende SQL-Anweisung.
+(5 BE)
+1.3.4 Der Schüler Jonathan Meier (Ausweisnummer 12345) hat die Schule verlassen und soll aus der
+Datenbank entfernt werden. Die Löschanweisung ‚DELETE FROM Schueler WHERE
+ausweisNr = 12345;‘ löst folgende Fehlermeldung aus:
+/* SQL Fehler (1451): Cannot delete or update a parent row: a foreign
+key constraint fails (`slz`.`reservierung`, CONSTRAINT
+`reservierung_ibfk_2` FOREIGN KEY (`ausweisNr`) REFERENCES `schueler`
+(`ausweisNr`)) */
+Analysieren Sie die Fehlermeldung und beschreiben Sie mögliche Vorgehensweisen, um den
+Schüler erfolgreich aus der Datenbank zu entfernen.
+(3 BE)
+1.4 Die Datenbank soll um folgende Anforderungen erweitert werden:
+– Die Bibliothek des SLZ enthält Bücher und Fachzeitschriften. Ein Buch hat einen Titel und
+eine eindeutige ISBN. Häufig sind mehrere Exemplare eines Buches vorhanden. Jedes
+Exemplar besitzt eine eindeutige Signatur.
+– Zeitschriften sind dagegen nur jeweils einmal vorhanden. Sie erscheinen in einzelnen
+Ausgaben. Jede Ausgabe ist durch das Erscheinungsjahr und die Heftnummer
+gekennzeichnet. In einer Ausgabe erscheinen in der Regel mehrere Artikel.
+– Ein Buch oder ein Artikel kann von mehreren Autoren verfasst sein, die jeweils mit ihrem
+Namen zu speichern sind.
+– Die Artikel sind ebenso wie Bücher einem oder mehreren Fachgebieten (z.B.
+Programmiertechnik, Datenbanken, Solartechnik) zugeordnet.
+– Von den Schülern können nur Bücher ausgeliehen werden. Zeitschriften müssen im SLZ
+gelesen werden.
+Entwickeln und zeichnen Sie ein ER-Modell, das die genannten Anforderungen umsetzt.
+Hinweis: Das ER-Diagramm ist mit Entitätstypen, Attributen und Beziehungen sowie deren
+Kardinalitäten in [min, max]-Notation darzustellen.

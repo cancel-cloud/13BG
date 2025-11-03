@@ -1,0 +1,86 @@
+2 Objektorientierte Entwicklung eines Reservierungs- und Ausleihsystems
+2.1 Für das Reservierungssystem des SLZ wurde ein erstes UML-Anwendungsfalldiagramm
+(Material 4) entwickelt. Geben Sie den Zweck von UML-Anwendungsfalldiagrammen an.
+Beschreiben Sie anhand des dargestellten Diagramms die wesentlichen Notationselemente und
+die Unterschiede zwischen extend- und include-Beziehungen.
+(5 BE)
+2.2 Ein UML-Klassendiagramm des Reservierungssystems liegt in Material 5 vor.
+2.2.1 Modellieren und zeichnen Sie für die in Material 1 aufgeführten, grau hinterlegten Daten ein
+UML-Objektdiagramm auf Grundlage des Klassendiagramms (Material 5).
+(5 BE)
+Seite 3 von 13
+Hessisches Kultusministerium Landesabitur 2021 (Nachtermin)
+Praktische Informatik Thema und Aufgabenstellung
+Leistungskurs Vorschlag C
+2.2.2 Überführen Sie die Klassen Geraetetyp und Geraet in Anweisungen einer objektorientierten
+Programmiersprache und implementieren Sie die Konstruktoren und Methoden.
+Hinweis: Die Dokumentationen der Klassen List und Date sind in Material 6 zu finden.
+(14 BE)
+2.2.3 Die Methode reservieren() der Klasse SLZVerwaltung erzeugt das Reservierungsobjekt
+und fügt es in die Reservierungsliste ein, wenn ein freies Gerät des gewünschten Typs gefunden
+wurde. Konnte die Reservierung vorgenommen werden, gibt die Methode das Reservierungs-
+Objekt zurück, ansonsten null.
+Implementieren Sie die Methode.
+(3 BE)
+2.3 Die Reservierung von Geräten und die Ausleihe von Büchern soll durch eine Client-Server-
+Lösung umgesetzt werden. Für Reservierungen und Ausleihen ist die Authentisierung des
+Schülers erforderlich. Dazu wird an einem Client-PC ein RFID-Lesegerät zum Lesen des
+Schülerausweises und ein Barcodescanner zum Scannen der Barcode-Signatur eines Buch-
+Exemplars angeschlossen. Das Client-Server-System soll Schülern folgende Funktionalitäten
+zur Verfügung stellen:
+– Authentisierung mithilfe des Schülerausweises,
+– Ausleihen eines Exemplars,
+– Rückgabe eines ausgeliehenen Exemplars,
+– Scannen der Barcode-Signatur bei Ausleihen und Rückgaben,
+– Druck einer Rückgabebestätigung, wenn gewünscht,
+– Reservieren eines Gerätes.
+Die Aufsicht soll zusätzlich in der Lage sein, die Schüler, die ausgeliehene Bücher nach 14
+Tagen noch nicht zurückgegeben haben, per Email zu benachrichtigen.
+Für das Ausleihsystem wurde bereits ein Klassendiagramm entwickelt (Material 7).
+2.3.1 Entwickeln und zeichnen Sie für die unter 2.3 genannten Funktionalitäten ein
+Anwendungsfalldiagramm in UML-Notation.
+Hinweis: Das UML-Anwendungsfalldiagramm in Material 4 ist zu ergänzen.
+(6 BE)
+2.3.2 Die Methode benachrichtigeSchueler() der Klasse SLZVerwaltung versendet an die
+Schüler eine E-Mail, die die Ausleihfrist von 14 Tagen überschritten haben. Jeder Schüler der
+Schule hat eine interne E-Mail in der Form [vorname].[nachname]@slz-bs.eu. Die
+folgenden Beispiele zeigen den Aufbau einer Nachricht.:
+Ausleihfrist überschritten:
+Signatur IW 1234-33 (ISBN 978-3-14-037126-1, Titel Informatik 1)
+Signatur GW 3421-12 (ISBN 978-3-481-02970-8, Titel Gebäudetechnik)
+Entwickeln Sie ein Struktogramm für die Methode.
+(7 BE)
+Seite 4 von 13
+Hessisches Kultusministerium Landesabitur 2021 (Nachtermin)
+Praktische Informatik Thema und Aufgabenstellung
+Leistungskurs Vorschlag C
+2.3.3 Nach erfolgreichem Verbindungsaufbau sendet der SLZ-Server eine Willkommensbotschaft an
+den Client. Daraufhin muss sich der Schüler authentisieren, um zum Beispiel Buchexemplare
+zurückzugeben oder auszuleihen.
+Ein Beispiel für eine Sitzung ist im Folgenden wiedergegeben. Das Zeichen > steht für die
+Antwort vom Server, < steht für die Anforderung vom Client, <LF> steht für Line Feed ('\n').
+>+OK Bitte authentisieren Sie sich.<LF>
+<authentisieren;45577<LF> (45577: Nummer des Schülerausweises)
+>+OK Authentifizierung erfolgt<LF>
+<zurueckgeben;IW 123434-34<LF> (IW 123434-34: Signatur des Exemplars)
+>+OK Ausleihe wurde gelöscht<LF>
+<ausleihen;GWS 77453-12<LF>
+>+OK Ausleihnummer 6339<LF>
+<ausleihen;DB 1743-15<LF>
+>+OK Ausleihnummer 6340<LF>
+<Ende<LF>
+>bye<LF>
+Entwickeln und zeichnen Sie ein Sequenzdiagramm in UML-Notation unter Verwendung der
+Vorlage in Material 8, das den Ablauf der Client-Server-Kommunikation nach erfolgreicher
+Authentifizierung realisiert.
+Hinweise: Es ist nur die Serverseite darzustellen. Es sind nur die Kommandos „ausleihen“ und
+„Ende“ zu berücksichtigen. Fehlerfälle und das Erzeugen von Datums-Objekten sind zu
+vernachlässigen. Die Dokumentationen der Socket-Klassen sind in Material 6 zu finden.
+(10 BE)
+2.3.4 Überführen Sie die Klasse SLZClient aus Material 7 in Anweisungen einer objektorientierten
+Programmiersprache und implementieren Sie die Methoden verbinden(),
+authentisieren(), ausleihen(), zurueckgeben() und beenden().
+Hinweise: Die Methoden verbinden() und authentisieren() geben bei erfolgreicher
+Ausführung true zurück, die weiteren Methoden liefern die Antwort des Servers als
+Zeichenkette. Die Dokumentation der Klasse Serial ist in Material 6 zu finden.
+(10 BE)

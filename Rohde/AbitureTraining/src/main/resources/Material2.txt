@@ -1,0 +1,274 @@
+## **MATERIAL 4 — UML USE CASE DIAGRAM (ASCII)**
+
+```
+                          +----------------+
+                          |   Aufsicht     |
+                          +--------+-------+
+                                   |
+                                   | (uses system)
+                                   v
+                         +---------------------+
+                         |   SLZ-Verwaltung    |
+                         +----------+----------+
+                                    |
+               +--------------------+--------------------+
+               |                                         |
+               v                                         v
+ +-------------------------+                 +------------------------+
+ |     Gerät reservieren   |                 |   Reservierung suchen  |
+ +-------------------------+                 +------------------------+
+             ^                                          ^
+             |                                          |
+             |                                          |
+             |                   <<include>>            |
+             |                                          |
+             |                                          |
+    +------------------+                      +------------------+
+    |   Gerät suchen   |                      | Reservierung     |
+    +------------------+                      |    suchen        |
+                                              +------------------+
+
+                            <<extend>>
+                   +------------------------+
+                   |    Gerät ausleihen     |
+                   +------------------------+
+                              ^
+                              |
+                      Condition: {Reservierung vorhanden?}
+
+                            <<extend>>
+                   +------------------------+
+                   |   Freies Gerät suchen  |
+                   +------------------------+
+                              ^
+                              |
+                      Condition: {keine Reservierung?}
+```
+
+---
+
+## **MATERIAL 5 — UML CLASS DIAGRAM (RESERVIERUNGSSYSTEM)**
+
+```
++-------------------------------------------------------+
+|                     Geraetetyp                        |
++-------------------------------------------------------+
+| - geraetetypNr : int                                   |
+| - bezeichnung : String                                 |
++-------------------------------------------------------+
+| + sucheFreiesGeraet(von : Date, bis : Date) : Geraet   |
+| + erfasseGeraet()                                      |
+| + Geraetetyp(typNr : int, bezeichnung : String)        |
++-----------------------------+-------------------------+
+                              | 1
+                              |
+                              | *
++-------------------------------------------------------+
+|                        Geraet                          |
++-------------------------------------------------------+
+| - geraeteNr : int                                       |
+| - einsatzBereit : boolean                               |
++-------------------------------------------------------+
+| + loescheReservierung(r : Reservierung) : boolean       |
+| + hinzufuegenReservierung(res : Reservierung)           |
+| + istFrei(von : Date, bis : Date) : boolean             |
+| + Geraet(typ : Geraetetyp)                              |
++-----------------------------+-------------------------+
+                              |
+                              | *
+                              |
++-------------------------------------------------------+
+|                      Reservierung                      |
++-------------------------------------------------------+
+| - reservierungsNr : int                                 |
+| - vonDatum : Date                                       |
+| - bisDatum : Date                                       |
++-------------------------------------------------------+
+| + Reservierung(g : Geraet, s : Schueler, von:Date, bis:Date) |
++-----------------------------+-------------------------+
+        ^                                         ^
+        | *                                       | *
+        |                                         |
++------------------------+            +-------------------------+
+|       Geraet           |            |        Schueler         |
++------------------------+            +-------------------------+
+| (see above)            |            | - ausweisNr : int        |
+|                        |            | - vorname : String       |
+|                        |            | - nachname : String      |
++------------------------+            +-------------------------+
+                                     | + Schueler(nr:int, nn:String, vn:String) |
+                                     +------------------------------------------+
+
++-------------------------------------------------------+
+|                    SLZVerwaltung                      |
++-------------------------------------------------------+
+| - typen : List<Geraetetyp>                             |
+| - geraete : List<Geraet>                               |
+| - reservierungen : List<Reservierung>                  |
+| - schueler1 : List<Schueler>                           |
++-------------------------------------------------------+
+| + storniereReservierung(r : Reservierung)              |
+| + sucheReservierung(resNr : int) : Reservierung        |
+| + reservieren(typNr:int,s:Schueler,von:Date,bis:Date):Reservierung|
+| + sucheFreiesGeraetVonTyp(typNr:int,von:Date,bis:Date):Geraet     |
+| + sucheSchueler(ausweisNr:int):Schueler                |
+| + SLZVerwaltung()                                      |
++-------------------------------------------------------+
+```
+
+---
+
+## **MATERIAL 6 — CLASS DOCUMENTATION (FULL TEXT EXACT)**
+
+```
+Klasse Date
+
+Date()
+  erzeugt ein Date-Objekt mit dem aktuellen Systemdatum.
+
+Date(day: int, month: int, year: int)
+  erzeugt ein Date-Objekt mit den Werten von day, month und year.
+
+compareTo(date: Date): int
+  < 0 : dieses Datum liegt vor dem Datum des Parameters
+  = 0 : gleich
+  > 0 : dieses Datum liegt nach dem Datum des Parameters
+
+isBefore(d: Date): boolean
+  true, wenn dieses Datum vor d liegt.
+
+isAfter(d: Date): boolean
+  true, wenn dieses Datum nach d liegt.
+
+isBetween(d1: Date, d2: Date): boolean
+  true, wenn das Datum zwischen d1 und d2 liegt.
+
+toString(): String
+  liefert Format dd.mm.yyyy
+```
+
+```
+Klasse List<T>
+
+List<T>()                           erzeugt generische Liste.
+add(obj: T)                         hängt Element hinten an.
+add(index: int, obj: T)             fügt an Position index ein.
+get(index: int): T                  gibt Element zurück oder null.
+remove(obj: T): boolean             entfernt erstes Vorkommen.
+size(): int                         Anzahl der Elemente.
+```
+
+```
+Klasse Serial
+
+Serial(portName:String, baudrate:int, dataBits:int, stopBits:int, parity:int)
+open(): boolean
+close()
+dataAvailable(): int
+read(): int
+write(value: int)
+```
+
+```
+Klasse ServerSocket
+
+ServerSocket(localPort : int)
+accept(): Socket
+close()
+```
+
+```
+Klasse Socket
+
+Socket(remoteHostIP: String, remotePort : int)
+connect(): boolean
+readLine(): String
+write(s: String)
+close()
+```
+
+```
+Klasse String
+
+equals(str: String): boolean
+split(str: String): String[]
+startsWith(str: String): boolean
+```
+
+---
+
+## **MATERIAL 7 — UML CLASS DIAGRAM (CLIENT-SERVER SYSTEM)**
+
+```
++--------------------------------------------------------+
+|                      SLZClient                         |
++--------------------------------------------------------+
+| - socket : Socket                                       |
++--------------------------------------------------------+
+| + beenden() : String                                    |
+| + reservieren(typ:int, von:Date, bis:Date) : String     |
+| + druckeBestaetigung()                                  |
+| + zurueckgeben() : String                               |
+| + ausleihen() : String                                  |
+| + authentisieren() : boolean                            |
+| + verbinden(ip:String, port:int) : boolean              |
+| + SLZClient()                                           |
++--------------------------------------------------------+
+```
+
+```
++----------------------------------+
+|        BarcodeScanner            |
++----------------------------------+
+| - serial : Serial                |
++----------------------------------+
+| + scanneBarcode() : String       |
++----------------------------------+
+```
+
+```
++----------------------------------+
+|          RFIDReader              |
++----------------------------------+
+| - serial : Serial                |
++----------------------------------+
+| + readCard() : String            |
+| + isCardAvailable() : boolean    |
++----------------------------------+
+```
+
+```
++----------------------------------+
+|            SLZServer             |
++----------------------------------+
+| - server : ServerSocket          |
++----------------------------------+
+| + start()                        |
+| + SLZServer(port:int, slz:SLZVerwaltung) |
++----------------------------------+
+```
+
+```
+Relationships:
+SLZClient ----uses----> SLZServer ----has----> SLZVerwaltung
+BarcodeScanner + RFIDReader both use Serial
+```
+
+---
+
+## **MATERIAL 8 — UML SEQUENCE DIAGRAM TEMPLATE**
+
+```
+:SLZClient          :SLZServer          :Socket s          :Schueler       :SLZVerwaltung
+     |                   |                   |                 |                 |
+     |------ verbinden -->|                   |                 |                 |
+     |                   |---- accept() ----->|                 |                 |
+     |                   |                   |                 |                 |
+     |---- readLine() ----------------------->|                 |                 |
+     |                   |                   |                 |---- sucheSchueler() -->|
+     |                   |                   |                 |<------------------------|
+     |                   |                   |                 |---- reservieren() ------>|
+     |                   |                   |                 |<------------------------|
+```
+
+---
