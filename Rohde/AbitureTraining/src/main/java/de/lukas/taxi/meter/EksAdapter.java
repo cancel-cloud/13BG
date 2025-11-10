@@ -213,10 +213,13 @@ public class EksAdapter {
                     continue;
                 } else if (finalResponse == EM) {
                     return 1;
+                } else {
+                    // Unknown final response, return error immediately
+                    return 2;
                 }
             }
 
-            // Unknown response, retry
+            // Unknown response before data transmission, retry
             retries++;
         }
 

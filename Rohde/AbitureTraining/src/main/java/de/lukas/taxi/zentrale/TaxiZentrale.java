@@ -150,25 +150,20 @@ public class TaxiZentrale {
     }
 
     /**
-     * Assigns an order to a driver and updates taxi status.
+     * Assigns an order to a specific taxi with a driver and updates taxi status.
      *
+     * @param taxi   the specific taxi to assign
      * @param fahrer the assigned driver
      * @param von    pickup address
      * @param nach   destination address
      */
-    public void vergebeAuftrag(Fahrer fahrer, Adresse von, Adresse nach) {
-        if (fahrer == null) {
+    public void vergebeAuftrag(Taxi taxi, Fahrer fahrer, Adresse von, Adresse nach) {
+        if (taxi == null || fahrer == null) {
             return;
         }
 
-        // Find a free taxi and assign it
-        for (int i = 0; i < alleTaxis.size(); i++) {
-            Taxi taxi = alleTaxis.get(i);
-            if (taxi.getStatus() == Taxi.FREI) {
-                taxi.setStatus(Taxi.ANFAHRT_KUNDE);
-                break;
-            }
-        }
+        // Update the specific taxi's status
+        taxi.setStatus(Taxi.ANFAHRT_KUNDE);
     }
 
     /**
@@ -202,9 +197,8 @@ public class TaxiZentrale {
 
                 // Step 3: Ask for willingness
                 if (anfragenBereitschaft(fahrer, von, nach)) {
-                    // Step 4: Assign order
-                    vergebeAuftrag(fahrer, von, nach);
-                    taxi.setStatus(Taxi.ANFAHRT_KUNDE);
+                    // Step 4: Assign order with the specific taxi
+                    vergebeAuftrag(taxi, fahrer, von, nach);
                     return true;
                 }
             }
@@ -245,17 +239,17 @@ public class TaxiZentrale {
         return null;
     }
 
-    // Getters
+    // Getters (return defensive copies to protect internal state)
     public List<Taxi> getAlleTaxis() {
-        return alleTaxis;
+        return new List<>(alleTaxis);
     }
 
     public List<Fahrer> getAlleFahrer() {
-        return alleFahrer;
+        return new List<>(alleFahrer);
     }
 
     public List<Auftrag> getAuftraege() {
-        return auftraege;
+        return new List<>(auftraege);
     }
 
     /**

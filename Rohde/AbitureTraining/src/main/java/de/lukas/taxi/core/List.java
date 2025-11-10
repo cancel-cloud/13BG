@@ -1,6 +1,7 @@
 package de.lukas.taxi.core;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Generic list wrapper around ArrayList with required methods.
@@ -15,6 +16,15 @@ public class List<T> {
      */
     public List() {
         this.internalList = new ArrayList<>();
+    }
+
+    /**
+     * Creates a list with elements from another list (defensive copy).
+     *
+     * @param other the list to copy from
+     */
+    public List(List<T> other) {
+        this.internalList = new ArrayList<>(other.internalList);
     }
 
     /**
@@ -53,9 +63,12 @@ public class List<T> {
      * Removes the element at the specified position.
      *
      * @param index the index of the element to be removed
-     * @return the element that was removed
+     * @return the element that was removed, or null if index is out of bounds
      */
     public T remove(int index) {
+        if (index < 0 || index >= internalList.size()) {
+            return null;
+        }
         return internalList.remove(index);
     }
 
@@ -79,10 +92,11 @@ public class List<T> {
 
     /**
      * Gets the internal ArrayList for advanced operations.
+     * Returns an unmodifiable view to protect internal state.
      *
-     * @return the internal ArrayList
+     * @return unmodifiable view of the internal ArrayList
      */
-    public ArrayList<T> getInternalList() {
-        return internalList;
+    public java.util.List<T> getInternalList() {
+        return Collections.unmodifiableList(internalList);
     }
 }
