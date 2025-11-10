@@ -1,10 +1,7 @@
-package de.slz;
+package de.lukas.schuelerGeraetVerwaltung;
 
-import de.slz.model.Geraet;
-import de.slz.model.Geraetetyp;
-import de.slz.model.Reservierung;
-import de.slz.model.SLZVerwaltung;
-import de.slz.model.Schueler;
+import de.lukas.schuelerGeraetVerwaltung.model.Geraet;
+import de.lukas.schuelerGeraetVerwaltung.model.Geraetetyp;
 
 import java.time.LocalDate;
 
@@ -14,7 +11,7 @@ public final class Main {
     }
 
     public static void main(String[] args) {
-        SLZVerwaltung verwaltung = new SLZVerwaltung();
+        de.lukas.schuelerGeraetVerwaltung.SLZVerwaltung verwaltung = new de.lukas.schuelerGeraetVerwaltung.SLZVerwaltung();
 
         Geraetetyp laptopTyp = new Geraetetyp(223, "Dell Latitude E5500");
         verwaltung.registriereTyp(laptopTyp);
@@ -25,26 +22,26 @@ public final class Main {
         verwaltung.registriereGeraet(laptop2);
         verwaltung.registriereGeraet(laptop3);
 
-        Schueler kai = new Schueler(45577, "Kai", "Muster");
-        Schueler laura = new Schueler(23225, "Laura", "May");
-        Schueler lia = new Schueler(89761, "Lia", "Meier");
+        de.lukas.schuelerGeraetVerwaltung.Schueler kai = new de.lukas.schuelerGeraetVerwaltung.Schueler(45577, "Kai", "Muster");
+        de.lukas.schuelerGeraetVerwaltung.Schueler laura = new de.lukas.schuelerGeraetVerwaltung.Schueler(23225, "Laura", "May");
+        de.lukas.schuelerGeraetVerwaltung.Schueler lia = new de.lukas.schuelerGeraetVerwaltung.Schueler(89761, "Lia", "Meier");
         verwaltung.registriereSchueler(kai);
         verwaltung.registriereSchueler(laura);
         verwaltung.registriereSchueler(lia);
 
-        Reservierung r1 = verwaltung.reservieren(223, kai,
+        de.lukas.schuelerGeraetVerwaltung.Reservierung r1 = verwaltung.reservieren(223, kai,
                 LocalDate.of(2021, 6, 7), LocalDate.of(2021, 6, 9));
-        Reservierung r2 = verwaltung.reservieren(223, laura,
+        de.lukas.schuelerGeraetVerwaltung.Reservierung r2 = verwaltung.reservieren(223, laura,
                 LocalDate.of(2021, 6, 15), LocalDate.of(2021, 6, 16));
 
         System.out.println("Erste Reservierung: " + beschreibe(r1));
         System.out.println("Zweite Reservierung: " + beschreibe(r2));
 
-        Reservierung konflikt = verwaltung.reservieren(223, lia,
+        de.lukas.schuelerGeraetVerwaltung.Reservierung konflikt = verwaltung.reservieren(223, lia,
                 LocalDate.of(2021, 6, 8), LocalDate.of(2021, 6, 10));
         System.out.println("Konflikt-Reservierung: " + beschreibe(konflikt));
 
-        Reservierung freieReservierung = verwaltung.reservieren(223, lia,
+        de.lukas.schuelerGeraetVerwaltung.Reservierung freieReservierung = verwaltung.reservieren(223, lia,
                 LocalDate.of(2021, 6, 21), LocalDate.of(2021, 6, 23));
         System.out.println("Freie Reservierung: " + beschreibe(freieReservierung));
 
@@ -54,7 +51,7 @@ public final class Main {
                 + (freiesGeraet != null ? freiesGeraet.getGeraeteNr() : "keins"));
     }
 
-    private static String beschreibe(Reservierung r) {
+    private static String beschreibe(de.lukas.schuelerGeraetVerwaltung.Reservierung r) {
         if (r == null) {
             return "keine Reservierung möglich";
         }

@@ -1,4 +1,4 @@
-package de.slz.net;
+package de.lukas.schuelerGeraetVerwaltung.net;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

@@ -1,4 +1,6 @@
-package de.slz.model;
+package de.lukas.schuelerGeraetVerwaltung.model;
+
+import de.lukas.schuelerGeraetVerwaltung.Schueler;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -11,7 +13,7 @@ public class Reservierung {
     private final LocalDate vonDatum;
     private final LocalDate bisDatum;
 
-    public Reservierung(int reservierungsNr, Geraet geraet, Schueler schueler,
+    public Reservierung(int reservierungsNr, Geraet geraet, de.lukas.schuelerGeraetVerwaltung.model.Schueler schueler,
                         LocalDate vonDatum, LocalDate bisDatum) {
         if (bisDatum.isBefore(vonDatum)) {
             throw new IllegalArgumentException("bisDatum vor vonDatum");
@@ -31,7 +33,7 @@ public class Reservierung {
         return geraet;
     }
 
-    public Schueler getSchueler() {
+    public de.lukas.schuelerGeraetVerwaltung.model.Schueler getSchueler() {
         return schueler;
     }
 

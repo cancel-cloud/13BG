@@ -1,4 +1,7 @@
-package de.slz.model;
+package de.lukas.schuelerGeraetVerwaltung.model;
+
+import de.lukas.schuelerGeraetVerwaltung.Geraetetyp;
+import de.lukas.schuelerGeraetVerwaltung.Reservierung;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,7 +19,7 @@ public class Geraet {
     private final Geraetetyp typ;
     private final List<Reservierung> reservierungen;
 
-    public Geraet(Geraetetyp typ, int geraeteNr, boolean einsatzBereit) {
+    public Geraet(de.lukas.schuelerGeraetVerwaltung.model.Geraetetyp typ, int geraeteNr, boolean einsatzBereit) {
         this.typ = Objects.requireNonNull(typ, "typ");
         this.geraeteNr = geraeteNr;
         this.einsatzBereit = einsatzBereit;
@@ -36,22 +39,22 @@ public class Geraet {
         this.einsatzBereit = einsatzBereit;
     }
 
-    public Geraetetyp getTyp() {
+    public de.lukas.schuelerGeraetVerwaltung.model.Geraetetyp getTyp() {
         return typ;
     }
 
-    public List<Reservierung> getReservierungen() {
+    public List<de.lukas.schuelerGeraetVerwaltung.model.Reservierung> getReservierungen() {
         return Collections.unmodifiableList(reservierungen);
     }
 
-    public boolean loescheReservierung(Reservierung reservierung) {
+    public boolean loescheReservierung(de.lukas.schuelerGeraetVerwaltung.model.Reservierung reservierung) {
         if (reservierung == null) {
             return false;
         }
         return reservierungen.remove(reservierung);
     }
 
-    public void hinzufuegenReservierung(Reservierung reservierung) {
+    public void hinzufuegenReservierung(de.lukas.schuelerGeraetVerwaltung.model.Reservierung reservierung) {
         Objects.requireNonNull(reservierung, "reservierung");
         reservierungen.add(reservierung);
     }
@@ -63,7 +66,7 @@ public class Geraet {
         if (!einsatzBereit) {
             return false;
         }
-        for (Reservierung reservierung : reservierungen) {
+        for (de.lukas.schuelerGeraetVerwaltung.model.Reservierung reservierung : reservierungen) {
             if (reservierung.kollidiertMit(von, bis)) {
                 return false;
             }

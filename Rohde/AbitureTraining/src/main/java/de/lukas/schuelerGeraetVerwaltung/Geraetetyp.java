@@ -1,4 +1,4 @@
-package de.slz.model;
+package de.lukas.schuelerGeraetVerwaltung.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

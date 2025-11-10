@@ -1,4 +1,6 @@
-package de.slz.model;
+package de.lukas.schuelerGeraetVerwaltung.model;
+
+import de.lukas.schuelerGeraetVerwaltung.Schueler;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -32,7 +34,7 @@ public class SLZVerwaltung {
         }
     }
 
-    public void registriereSchueler(Schueler s) {
+    public void registriereSchueler(de.lukas.schuelerGeraetVerwaltung.model.Schueler s) {
         if (!schueler.contains(s)) {
             schueler.add(s);
         }
@@ -58,7 +60,7 @@ public class SLZVerwaltung {
         return null;
     }
 
-    public Reservierung reservieren(int typNr, Schueler s, LocalDate von, LocalDate bis) {
+    public Reservierung reservieren(int typNr, de.lukas.schuelerGeraetVerwaltung.model.Schueler s, LocalDate von, LocalDate bis) {
         Objects.requireNonNull(s, "schueler");
         Objects.requireNonNull(von, "von");
         Objects.requireNonNull(bis, "bis");
@@ -92,8 +94,8 @@ public class SLZVerwaltung {
         return typ.sucheFreiesGeraet(von, bis);
     }
 
-    public Schueler sucheSchueler(int ausweisNr) {
-        for (Schueler s : schueler) {
+    public de.lukas.schuelerGeraetVerwaltung.model.Schueler sucheSchueler(int ausweisNr) {
+        for (de.lukas.schuelerGeraetVerwaltung.model.Schueler s : schueler) {
             if (s.getAusweisNr() == ausweisNr) {
                 return s;
             }

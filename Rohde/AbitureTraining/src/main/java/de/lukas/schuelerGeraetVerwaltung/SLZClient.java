@@ -1,6 +1,6 @@
-package de.slz.client;
+package de.lukas.schuelerGeraetVerwaltung.client;
 
-import de.slz.net.Socket;
+import de.lukas.schuelerGeraetVerwaltung.net.Socket;
 
 import java.io.IOException;
 import java.time.LocalDate;

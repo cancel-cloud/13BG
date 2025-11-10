@@ -1,4 +1,4 @@
-package de.slz.model;
+package de.lukas.schuelerGeraetVerwaltung.model;
 
 import java.util.Objects;
 
