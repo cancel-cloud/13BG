@@ -276,19 +276,23 @@ public class Taxameter {
                     display.printLine("Drucke Quittung...");
                     String[] parts = currentAuftragData.split(";");
                     if (parts.length >= 8) {
-                        String receipt = "Taxi-Quittung\n" +
-                                "=============\n" +
-                                "Taxi-Nr: " + parts[0] + "\n" +
-                                "Fahrer-Nr: " + parts[1] + "\n" +
-                                "Von: " + parts[2] + "\n" +
-                                "Nach: " + parts[3] + "\n" +
-                                "Start: " + parts[4] + "\n" +
-                                "Ende: " + parts[5] + "\n" +
-                                "Strecke: " + parts[6] + " km\n" +
-                                "Preis: " + String.format("%.2f", Double.parseDouble(parts[7])) + " EUR\n" +
-                                "=============\n" +
-                                "Vielen Dank!";
-                        printer.printReceipt(receipt);
+                        try {
+                            String receipt = "Taxi-Quittung\n" +
+                                    "=============\n" +
+                                    "Taxi-Nr: " + parts[0] + "\n" +
+                                    "Fahrer-Nr: " + parts[1] + "\n" +
+                                    "Von: " + parts[2] + "\n" +
+                                    "Nach: " + parts[3] + "\n" +
+                                    "Start: " + parts[4] + "\n" +
+                                    "Ende: " + parts[5] + "\n" +
+                                    "Strecke: " + parts[6] + " km\n" +
+                                    "Preis: " + String.format("%.2f", Double.parseDouble(parts[7])) + " EUR\n" +
+                                    "=============\n" +
+                                    "Vielen Dank!";
+                            printer.printReceipt(receipt);
+                        } catch (NumberFormatException e) {
+                            display.printLine("Fehler beim Formatieren der Quittung!");
+                        }
                     }
                     break;
 

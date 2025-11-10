@@ -1,11 +1,13 @@
 package de.lukas.taxi.core;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * Represents a taxi order with all relevant information.
  * Task 1.3.1: Constructor parses semicolon-separated data.
  */
 public class Auftrag {
-    private static int nextAuftragNr = 1;
+    private static final AtomicInteger nextAuftragNr = new AtomicInteger(1);
 
     private final int auftragNr;
     private final DateTime start;
@@ -31,7 +33,7 @@ public class Auftrag {
     public Auftrag(Taxi taxi, Fahrer fahrer, String auftragsdaten) {
         this.taxi = taxi;
         this.fahrer = fahrer;
-        this.auftragNr = nextAuftragNr++;
+        this.auftragNr = nextAuftragNr.getAndIncrement();
         this.autowert = 0;
 
         if (auftragsdaten == null || auftragsdaten.trim().isEmpty()) {
@@ -64,10 +66,10 @@ public class Auftrag {
             // Parse price
             this.fahrpreis = Double.parseDouble(parts[5].trim());
 
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Fehler beim Parsen der Auftragsdaten: " + e.getMessage(), e);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Ungültige Zahl in Auftragsdaten: " + e.getMessage(), e);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Fehler beim Parsen der Auftragsdaten: " + e.getMessage(), e);
         }
     }
 
