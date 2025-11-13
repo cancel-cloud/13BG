@@ -429,7 +429,6 @@ lab/
 
 *.nbconvert/
 *.html
-*.pdf
 *.slides.html
 # Virtual Environments
 
