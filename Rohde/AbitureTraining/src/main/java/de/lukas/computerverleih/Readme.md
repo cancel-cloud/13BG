@@ -1,3 +1,16 @@
+# Computerverleih (Computer Rental)
+
+Java implementation of a school computer rental system with a console demo and supporting written tasks.
+
+## Entry point
+- `de.lukas.computerverleih.Main` - runs a full demonstration scenario
+
+## Run
+```bash
+./gradlew classes
+java -cp build/classes/java/main de.lukas.computerverleih.Main
+```
+
 ## Created Java Classes (14 files)
 
 | File                   |   Task | Description                               |
